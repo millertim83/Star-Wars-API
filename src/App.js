@@ -4,17 +4,40 @@ import SearchBar from './Components/SearchBar';
 import CharacterTable from './Components/CharacterTable';
 import axios from 'axios';
 
-const swapi = axios.create({
-  baseURL: 'https://swapi.dev/api/people/'
-})
+
+
 
 class App extends Component {
-  constructor() {
-    super();
-    swapi.get('/').then(response => {
-      console.log(response.data.results)
-    })
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      characters: []
+    }
   }
+
+  
+
+  componentDidMount() {
+    axios.get('https://swapi.dev/api/people/')
+      .then(results => {
+        results = results.data.results
+        results.forEach(result => {
+          let character = {};
+          character.name = result.name;
+          character.birthDate = result.birth_year;
+          character.height = result.height;
+          character.mass = result.mass;
+          //character.homeworld = getCharacterHomeworld();
+          //character.species = getCharacterSpecies(result.species);
+          this.setState({ characters: [...this.state.characters, character] })
+        });
+        })
+        .catch(err => console.log(err));
+        
+  }
+  
+  
   render() {
     return (
       <div className="App">
@@ -22,30 +45,13 @@ class App extends Component {
           <h1>Star Wars API</h1> 
         </header>
         <SearchBar />
-        <CharacterTable />
+        <CharacterTable characters = {this.state.characters} />
       </div>
     );
   }
 }
 
-
 export default App;
 
 
-/*componentDidMount() {
-  axios.get('https://swapi.dev/api')
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.log(error);
-  })
-}*/
 
-/*
-;(async () => {
-  const response = await axios.get(https://swapi.dev/api/people)
-  console.log(response)
-})()
-
-*/ 
