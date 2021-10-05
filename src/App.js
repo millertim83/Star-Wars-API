@@ -28,6 +28,12 @@ class App extends Component {
           character.birthDate = result.birth_year;
           character.height = result.height;
           character.mass = result.mass;
+          let planetURL = result.homeworld;
+          console.log(planetURL);
+          axios.get(planetURL)
+            .then(response => {
+              character.homeworld = response.data.name;
+            });
           //character.homeworld = getCharacterHomeworld();
           //character.species = getCharacterSpecies(result.species);
           this.setState({ characters: [...this.state.characters, character] })

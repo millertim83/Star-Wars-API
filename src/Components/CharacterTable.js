@@ -4,15 +4,17 @@ import React from 'react';
 function CharacterTable(props) {
     console.log(props.characters);
 
-    const character = props.characters.map(character => {
-        <tr>
-            <td>{character.name}</td>
-            <td>{character.birthdate}</td>
-            <td>{character.height}</td>
-            <td>{character.mass}</td>
-        </tr>
-        
-    })
+    const tableRow = props.characters.map(character => {
+        return (
+            <tr> 
+                <td>{character.name}</td>
+                <td>{character.birthDate}</td>
+                <td>{character.height}</td>
+                <td>{character.mass}</td>
+                <td>{character.homeworld}</td>
+            </tr>
+        )
+    });
         
     
 
@@ -29,7 +31,7 @@ function CharacterTable(props) {
                         <th>Species</th>
                     </tr>
                 </thead>
-                {<tbody>{character}</tbody>}
+                {<tbody>{tableRow}</tbody>}
             </table>
         </div>
 
