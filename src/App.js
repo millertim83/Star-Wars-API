@@ -28,19 +28,24 @@ class App extends Component {
           character.height = result.height;
           character.mass = result.mass;
           character.homeworld = getHomeworld();
+          character.species = getSpecies();
 
-        
-          
-          
-          
           function getHomeworld() {
             let planetURL = result.homeworld;
             axios.get(planetURL)
               .then(response => {
                 character.homeworld = response.data.name;
-            }); return character.homeworld;
+              }); return character.homeworld;
           }
-          
+          function getSpecies() {
+            let speciesURL = result.species[0];
+              if (!speciesURL) {
+                return 'human';
+                } else axios.get(speciesURL)
+                  .then(response => {
+                    character.species = response.data.name;
+                    }); return character.species;
+          }
            
           
          
@@ -56,12 +61,13 @@ class App extends Component {
   }
 
   /*
+  let speciesURL = result.species[0];
   if (!speciesURL) {
     return 'human';
   } else axios.get(speciesURL)
-    .then(answer => {
-      character.species = answer.name;
-    })
+    .then(response => {
+      character.species = response.data.name;
+    }); return character.species;
   */
   
   

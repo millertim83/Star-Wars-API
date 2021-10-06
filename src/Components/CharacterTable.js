@@ -12,7 +12,7 @@ function CharacterTable(props) {
                 <td>{character.height}</td>
                 <td>{character.mass}</td>
                 <td>{character.homeworld}</td>
-                <td></td>
+                <td>{character.species}</td>
                 
             
             </tr>
