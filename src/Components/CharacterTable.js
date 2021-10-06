@@ -2,7 +2,7 @@ import React from 'react';
 
 
 function CharacterTable(props) {
-    console.log(props.characters);
+    //console.log(props.characters);
 
     const tableRow = props.characters.map(character => {
         return (
@@ -12,6 +12,9 @@ function CharacterTable(props) {
                 <td>{character.height}</td>
                 <td>{character.mass}</td>
                 <td>{character.homeworld}</td>
+                <td></td>
+                
+            
             </tr>
         )
     });
