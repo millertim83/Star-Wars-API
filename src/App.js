@@ -2,23 +2,27 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './Components/SearchBar';
 import CharacterTable from './Components/CharacterTable';
+import Pagination from './Components/Pagination';
 import axios from 'axios';
-
-
-
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handlePagination=this.handlePagination.bind(this);
     this.state = {
-      characters: []
+      characters: [],
+      pageURL: "https://swapi.dev/api/people",
+      pageNumber: "1"
     }
   }
 
-  
+  handlePagination = (currentPage) => {
+    this.setState({pageNumber: currentPage});
+    this.setState({pageURL: `https://swapi.dev/api/people/?page="${pageNumber}`});  
+  }
 
   componentDidMount() {
-    axios.get('https://swapi.dev/api/people/')
+    axios.get(this.state.pageURL)
       .then(results => {
         results = results.data.results
         results.forEach(result => {
@@ -40,37 +44,18 @@ class App extends Component {
           function getSpecies() {
             let speciesURL = result.species[0];
               if (!speciesURL) {
-                return 'human';
+                return 'Human';
                 } else axios.get(speciesURL)
                   .then(response => {
                     character.species = response.data.name;
                     }); return character.species;
           }
-           
-          
-         
             
-          
-          
-          
           this.setState({ characters: [...this.state.characters, character] })
         });
       })
         .catch(err => console.log(err));
-        
   }
-
-  /*
-  let speciesURL = result.species[0];
-  if (!speciesURL) {
-    return 'human';
-  } else axios.get(speciesURL)
-    .then(response => {
-      character.species = response.data.name;
-    }); return character.species;
-  */
-  
-  
   render() {
     return (
       <div className="App">
@@ -79,6 +64,7 @@ class App extends Component {
         </header>
         <SearchBar />
         <CharacterTable characters = {this.state.characters} />
+        <Pagination changePage = {this.handlePagination} />
       </div>
     );
   }
@@ -87,4 +73,10 @@ class App extends Component {
 export default App;
 
 
+
+/*
+
+
+
+*/
 

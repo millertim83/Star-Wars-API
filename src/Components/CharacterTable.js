@@ -1,9 +1,6 @@
 import React from 'react';
 
-
 function CharacterTable(props) {
-    //console.log(props.characters);
-
     const tableRow = props.characters.map(character => {
         return (
             <tr> 
@@ -13,14 +10,10 @@ function CharacterTable(props) {
                 <td>{character.mass}</td>
                 <td>{character.homeworld}</td>
                 <td>{character.species}</td>
-                
-            
             </tr>
         )
     });
         
-    
-
     return (
         <div>
             <table className="table table-bordered">
