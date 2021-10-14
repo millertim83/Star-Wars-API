@@ -12,14 +12,16 @@ class App extends Component {
     this.state = {
       characters: [],
       pageURL: "https://swapi.dev/api/people",
-      pageNumber: "1"
+
     }
   }
 
   handlePagination = (currentPage) => {
-    this.setState({pageNumber: currentPage});
-    this.setState({pageURL: `https://swapi.dev/api/people/?page="${pageNumber}`});  
-  }
+    console.log(currentPage);
+    axios
+      .get(`https://swapi.dev/api/people/?page=${currentPage}`)
+      .then((res) => this.setState({characters: [...res.data.results] }));
+  };
 
   componentDidMount() {
     axios.get(this.state.pageURL)
