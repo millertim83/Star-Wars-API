@@ -5,7 +5,7 @@ function CharacterTable(props) {
         return (
             <tr> 
                 <td>{character.name}</td>
-                <td>{character.birthDate}</td>
+                <td>{character.birth_year}</td>
                 <td>{character.height}</td>
                 <td>{character.mass}</td>
                 <td>{character.homeworld}</td>
@@ -20,7 +20,7 @@ function CharacterTable(props) {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Birth Date</th>
+                        <th>Birth Year</th>
                         <th>Height</th>
                         <th>Mass</th>
                         <th>Homeworld</th>

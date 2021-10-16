@@ -8,61 +8,63 @@ import axios from 'axios';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handlePagination=this.handlePagination.bind(this);
+    this.handlePagination = this.handlePagination.bind(this);
     this.state = {
       characters: [],
       pageURL: "https://swapi.dev/api/people",
 
     }
   }
+  
+  componentDidMount() {
+    this.getCharacters("https://swapi.dev/api/people")
+  }
+
+  getCharacters = URL => {
+    axios.get(URL)
+    .then(response => {
+      let characters = response.data.results
+      characters = Promise.all(characters.map(async (character) => {
+        character.homeworld = await this.getHomeworld(character.homeworld);
+        if (!character.species[0]){
+          character.species = "Human"
+          } else character.species = await this.getSpecies(character.species[0]);
+        return character;
+      })); 
+      characters.then(characters => {
+        this.setState({ characters })
+      });
+      
+      
+    })
+      .catch(err => console.log(err));
+
+
+  }
+
+  getHomeworld = async (homeworldURL) => {
+      const response = await axios.get(homeworldURL);
+      return response.data.name;
+  }
+
+  getSpecies = async (speciesURL) => {
+    const response = await axios.get(speciesURL);
+    return response.data.name;
+  }
+
+
 
   handlePagination = (currentPage) => {
-    console.log(currentPage);
-    axios
-      .get(`https://swapi.dev/api/people/?page=${currentPage}`)
-      .then((res) => this.setState({characters: [...res.data.results] }));
-  };
-
-  componentDidMount() {
-    axios.get(this.state.pageURL)
-      .then(results => {
-        results = results.data.results
-        results.forEach(result => {
-          let character = {};
-          character.name = result.name;
-          character.birthDate = result.birth_year;
-          character.height = result.height;
-          character.mass = result.mass;
-          character.homeworld = getHomeworld();
-          character.species = getSpecies();
-
-          function getHomeworld() {
-            let planetURL = result.homeworld;
-            axios.get(planetURL)
-              .then(response => {
-                character.homeworld = response.data.name;
-              }); return character.homeworld;
-          }
-          function getSpecies() {
-            let speciesURL = result.species[0];
-              if (!speciesURL) {
-                return 'Human';
-                } else axios.get(speciesURL)
-                  .then(response => {
-                    character.species = response.data.name;
-                    }); return character.species;
-          }
-            
-          this.setState({ characters: [...this.state.characters, character] })
-        });
-      })
-        .catch(err => console.log(err));
+    this.getCharacters(`https://swapi.dev/api/people/?page=${currentPage}`)
   }
+
+
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Star Wars API</h1> 
+          <h1 className = "text-center">Star Wars API</h1> 
         </header>
         <SearchBar />
         <CharacterTable characters = {this.state.characters} />
@@ -76,9 +78,5 @@ export default App;
 
 
 
-/*
 
-
-
-*/
 

@@ -1,8 +1,18 @@
 import React from 'react';
 
-function SearchBar() {
+const SearchBar = () => {
+    
+    
     return (
-        <h1>Search Bar</h1>
+        <div className = "text-center">
+            <form>
+                <input>
+                </input>
+
+                <button type="submit" className="btn">Search</button>
+                
+            </form>
+        </div>
     )
 }
 

@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Pagination = (props) => {
-        
-        
     return (
         <div class="btn-group" role="group">
             <button type="button" id="1" className="pageBtns btn btn-secondary"
@@ -29,7 +27,7 @@ const Pagination = (props) => {
             <button type="button" id="8" className="pageBtns btn btn-secondary"
                 onClick = {(e) => props.changePage(e.target.id)}
                 >8</button>
-            <button type="button" id="99" className="pageBtns btn btn-secondary"
+            <button type="button" id="9" className="pageBtns btn btn-secondary"
                 onClick = {(e) => props.changePage(e.target.id)}
                 >9</button>
         </div>
