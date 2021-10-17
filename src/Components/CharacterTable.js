@@ -16,7 +16,7 @@ function CharacterTable(props) {
         
     return (
         <div>
-            <table className="table table-bordered">
+            <table className="table table-bordered m-3">
                 <thead>
                     <tr>
                         <th>Name</th>
