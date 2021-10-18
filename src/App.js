@@ -9,10 +9,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handlePagination = this.handlePagination.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.state = {
-      characters: [],
-      pageURL: "https://swapi.dev/api/people",
-
+      characters: []
     }
   }
   
@@ -58,6 +57,10 @@ class App extends Component {
     this.getCharacters(`https://swapi.dev/api/people/?page=${currentPage}`)
   }
 
+  handleSearch = (searchInput) => {
+    this.getCharacters(`https://swapi.dev/api/people/?search=${searchInput}`)
+  }
+
 
 
   render() {
@@ -66,7 +69,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className = "text-center">Star Wars API</h1> 
         </header>
-        <SearchBar />
+        <SearchBar executeSearch = {this.handleSearch} />
         <CharacterTable characters = {this.state.characters} />
         <Pagination changePage = {this.handlePagination} />
       </div>
