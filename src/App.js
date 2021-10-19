@@ -8,15 +8,31 @@ import axios from 'axios';
 class App extends Component {
   constructor(props) {
     super(props);
+    
+    this.state = {
+      characters: [],
+      searchTerm: ""
+    };
     this.handlePagination = this.handlePagination.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.state = {
-      characters: []
-    }
+    this.handleChange = this.handleChange.bind(this);
+    this.getCharacters = this.getCharacters.bind(this);
+    this.getHomeworld = this.getHomeworld.bind(this);
+    this.getSpecies = this.getSpecies.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
   
   componentDidMount() {
-    this.getCharacters("https://swapi.dev/api/people")
+    const characterURL = "https://swapi.dev/api/people/?page=1"
+    this.getCharacters(characterURL);
+  }
+
+  handleChange(e) {
+    const { value } = e.target;
+    this.setState({
+      searchTerm: value
+    });
+    console.log(this.state.searchTerm);
   }
 
   getCharacters = URL => {
@@ -54,11 +70,22 @@ class App extends Component {
 
 
   handlePagination = (currentPage) => {
-    this.getCharacters(`https://swapi.dev/api/people/?page=${currentPage}`)
+    this.getCharacters(`https://swapi.dev/api/people/?page=${currentPage}`);
+    this.setState({searchTerm: ""});
   }
 
-  handleSearch = (searchInput) => {
-    this.getCharacters(`https://swapi.dev/api/people/?search=${searchInput}`)
+  handleSearch = (e) => {
+    e.preventDefault();
+    const search = this.state.searchTerm;
+    const searchURL = `https://swapi.dev/api/people/?search=${search}`
+    this.getCharacters(searchURL);
+  }
+
+  clearSearch = (e) => {
+    
+    this.setState({searchTerm: ""});
+    const characterURL = "https://swapi.dev/api/people/?page=1"
+    this.getCharacters(characterURL);
   }
 
 
@@ -69,7 +96,12 @@ class App extends Component {
         <header className="App-header">
           <h1 className = "text-center">Star Wars API</h1> 
         </header>
-        <SearchBar executeSearch = {this.handleSearch} />
+        <SearchBar 
+          handleSearch = {this.handleSearch} 
+          handleChange = {this.handleChange}
+          searchTerm = {this.state.searchTerm}
+          clearSearch = {this.clearSearch}
+        />
         <CharacterTable characters = {this.state.characters} />
         <Pagination changePage = {this.handlePagination} />
       </div>

@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const SearchBar = (props) => {
-    const [searchInput, setSearchInput] = useState("");
+   
     return (
         <div className = "text-center">
-            <form className="form-control-sm pb-2" 
-            onSubmit = {(e) => props.executeSearch(e.target.value)}>
+            <form className="form-control-sm pb-2 text-center col-6 d-flex align-items-center container-sm border border-dark" 
+                onSubmit = {props.handleSearch}>
                 <input 
-                    value={searchInput}
-                    type="text"
-                    placeholder="Search Characters"
-                    className="form-control-sm mr-2"
-                    //onChange = {(e) => setSearchInput(e.target.value)}
+                    required
+                    value = {props.searchTerm}
+                    type = "text"
+                    placeholder = "Search Characters"
+                    className = "form-control-sm mr-2 mt-2"
+                    onChange = {props.handleChange}
                 >
                 </input>
-                <button type="submit" className="btn btn-warning ml-100">Search</button>
+                <button type = "submit" className = "btn btn-warning mr-2 mt-2">Search</button>
+                <button type = "button" className = "btn btn-danger ml-2 mt-2" onClick = {props.clearSearch}>Clear Search</button>
             </form>
         </div>
     )
@@ -23,5 +25,3 @@ const SearchBar = (props) => {
 export default SearchBar;
 
 
-//below is search url - after equals we want to add user's input
-//https://swapi.dev/api/people/?search=
