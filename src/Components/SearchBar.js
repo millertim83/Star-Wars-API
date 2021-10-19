@@ -4,7 +4,7 @@ const SearchBar = (props) => {
    
     return (
         <div className = "text-center">
-            <form className="form-control-sm pb-2 text-center col-6 d-flex align-items-center container-sm border border-dark" 
+            <form className="text-center form-control-sm pb-2 col-6 d-flex justify-content-center align-items-center container-sm border border-dark" 
                 onSubmit = {props.handleSearch}>
                 <input 
                     required
@@ -15,7 +15,7 @@ const SearchBar = (props) => {
                     onChange = {props.handleChange}
                 >
                 </input>
-                <button type = "submit" className = "btn btn-warning mr-2 mt-2">Search</button>
+                <button type = "submit" className = "btn btn-warning mr-2 ml-2 mt-2">Search</button>
                 <button type = "button" className = "btn btn-danger ml-2 mt-2" onClick = {props.clearSearch}>Clear Search</button>
             </form>
         </div>
