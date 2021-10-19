@@ -8,11 +8,11 @@ import axios from 'axios';
 class App extends Component {
   constructor(props) {
     super(props);
-    
     this.state = {
       characters: [],
       searchTerm: ""
     };
+
     this.handlePagination = this.handlePagination.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -32,7 +32,6 @@ class App extends Component {
     this.setState({
       searchTerm: value
     });
-    console.log(this.state.searchTerm);
   }
 
   getCharacters = URL => {
@@ -41,20 +40,16 @@ class App extends Component {
       let characters = response.data.results
       characters = Promise.all(characters.map(async (character) => {
         character.homeworld = await this.getHomeworld(character.homeworld);
-        if (!character.species[0]){
+        if (!character.species[0]) {
           character.species = "Human"
           } else character.species = await this.getSpecies(character.species[0]);
-        return character;
+      return character;
       })); 
       characters.then(characters => {
         this.setState({ characters })
       });
-      
-      
     })
       .catch(err => console.log(err));
-
-
   }
 
   getHomeworld = async (homeworldURL) => {
@@ -66,8 +61,6 @@ class App extends Component {
     const response = await axios.get(speciesURL);
     return response.data.name;
   }
-
-
 
   handlePagination = (currentPage) => {
     this.getCharacters(`https://swapi.dev/api/people/?page=${currentPage}`);
@@ -82,13 +75,10 @@ class App extends Component {
   }
 
   clearSearch = (e) => {
-    
     this.setState({searchTerm: ""});
     const characterURL = "https://swapi.dev/api/people/?page=1"
     this.getCharacters(characterURL);
   }
-
-
 
   render() {
     return (
@@ -102,8 +92,12 @@ class App extends Component {
           searchTerm = {this.state.searchTerm}
           clearSearch = {this.clearSearch}
         />
-        <CharacterTable characters = {this.state.characters} />
-        <Pagination changePage = {this.handlePagination} />
+        <CharacterTable 
+        characters = {this.state.characters} 
+        />
+        <Pagination 
+        changePage = {this.handlePagination} 
+        />
       </div>
     );
   }
