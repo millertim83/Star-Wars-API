@@ -13,8 +13,11 @@ The app displays a table of characters from the swapi.dev API.  Users can click 
 This project forced me to take a big step up in my programming journey.  I learned how to make API calls and render specific data in a React app.
 
 In React, I learned a lot about:
+
     -how Components pass data to each other to render asynchronous code
+    
     -how 'state' works, and the differences in how it's used in class and function components
+    
     -how to handle using 'this'
   
 ### Future features to add
