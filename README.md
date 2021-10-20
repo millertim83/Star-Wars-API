@@ -17,11 +17,11 @@ In React, I learned a lot about:
   -how 'state' works, and the differences in how it's used in class and function components
   -how to handle using 'this'
   
-###Future features to add
+### Future features to add
 I plan on adding a loading spinner to show the user the app is working properly as it renders the data.
 Also, I'd like to expand the search functionality beyond just character names.
 
-###Author
+### Author
 Tim Miller, full stack web developer
 Website in progress
 
