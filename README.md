@@ -12,18 +12,15 @@ The app displays a table of characters from the swapi.dev API.  Users can click 
 
 This project forced me to take a big step up in my programming journey.  I learned how to make API calls and render specific data in a React app.
 
-In React, I learned a lot about:
-
-    -how Components pass data to each other to render asynchronous code
-    
-    -how 'state' works, and the differences in how it's used in class and function components
-    
-    -how to handle using 'this'
+In React, I learned a lot about:<br>
+    -how Components pass data to each other to render asynchronous code <br/>
+    -how 'state' works, and the differences in how it's used in class and function components <br/>
+    -how to handle using 'this' <br/>
   
 ### Future features to add
 I plan on adding a loading spinner to show the user the app is working properly as it renders the data.
 Also, I'd like to expand the search functionality beyond just character names.
 
 ### Author
-Tim Miller, full stack web developer
+Tim Miller, full stack web developer<br/>
 Website in progress
