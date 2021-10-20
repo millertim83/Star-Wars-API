@@ -4,7 +4,7 @@ This project was built with the Create React App tool, and uses Bootstrap v5 for
 
 ## Summary
 
-[Live deployment] (https://star-wars-api-app-1.herokuapp.com)
+[Live deployment](https://star-wars-api-app-1.herokuapp.com)
 
 <img width="1347" alt="Screen Shot 2021-10-20 at 11 12 40 AM" src="https://user-images.githubusercontent.com/80060826/138121005-b3b1c2b0-ffd0-4ce2-b1dd-ae48541c94c2.png">
 
