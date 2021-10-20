@@ -15,7 +15,9 @@ This project forced me to take a big step up in my programming journey.  I learn
 In React, I learned a lot about:
 
   -how Components pass data to each other to render asynchronous code
+  
   -how 'state' works, and the differences in how it's used in class and function components
+  
   -how to handle using 'this'
   
 ### Future features to add
